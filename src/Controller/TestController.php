@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ReponseType;
 use App\Entity\Reponse;
+use App\Entity\User;
 use App\Entity\Reclamation;
 use App\Repository\ReclamationRepository;
 use App\Repository\ResponseRepository;
@@ -17,15 +18,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ReponseRepository;
 
+use Mediumart\Orange\SMS\SMS;
+use Mediumart\Orange\SMS\Http\SMSClient;
+
 class TestController extends AbstractController
 {
      /**
      * @Route("/reponse/new/{id}", name="app_reponse_new")
      */
     public function new(Reclamation $recl,Reclamation $subj,Request $req,
-    ReclamationRepository $rep, $id,SessionInterface $session,ReponseRepository $reponseRepository ): Response
+    ReclamationRepository $rep, $id,SessionInterface $session,ReponseRepository $reponseRepository
+    , \Swift_Mailer $mailer ): Response
     {
 
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
        $reclamation = $session->get("reclamation",$subj->getId());
        
 
@@ -48,10 +54,30 @@ class TestController extends AbstractController
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($reponses);
+            $em->flush();
             //dd($reclamation,$reponses,$idReclamation);
            
             
-            $em->flush();
+            
+            // $client = SMSClient::getInstance('nEoxkRRL52MtHzUNAoaXc0ngnNVl9KDC', 'zSB1YIu2CSwoLnBL');
+            // $sms = new SMS($client);
+            // $sms->message( "Reclamation traiter avec success" )
+            //     ->from('+21654302753')
+            //     ->to("+216". strval($user->getTelephone()))
+            //      ->send();
+
+
+                $message = (new \Swift_Message('Response'))
+                ->setFrom('hamatalbi9921@gmail.com')
+                ->setTo("hazem.ghannem@esprit.tn")
+               ->setBody("Reclamation traiter avec success"
+                       
+        );
+        $mailer->send($message);
+        
+           
+          
+       
  
             return $this->redirectToRoute('app_reponse_index');
         }
@@ -63,6 +89,7 @@ class TestController extends AbstractController
 
         ]);
     }
+    
     
 
 }

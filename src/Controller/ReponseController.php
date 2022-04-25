@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Reponse;
+use App\Entity\Reponse ;
 use App\Entity\Reclamation;
+
 use App\Form\ReponseType;
 use App\Repository\ReponseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response ;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\ReclamationRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 /**
@@ -22,10 +24,16 @@ class ReponseController extends AbstractController
     /**
      * @Route("/", name="app_reponse_index", methods={"GET"})
      */
-    public function index(ReponseRepository $reponseRepository): Response
+    public function index(Request $request,PaginatorInterface $paginator)
     {
+        $response =$this->getDoctrine()->getRepository(Reponse::class)->findAll();
+        $response = $paginator->paginate(
+            $response, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5/*limit per page*/
+        );
         return $this->render('reponse/index.html.twig', [
-            'reponses' => $reponseRepository->findAll(),
+            'reponses' => $response
         ]);
     }
 

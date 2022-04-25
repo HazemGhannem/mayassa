@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/reclamation")
@@ -20,10 +21,17 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/listRec", name="app_reclamation_index", methods={"GET"})
      */
-    public function index(ReclamationRepository $reclamationRepository): Response
+    public function index(Request $request,PaginatorInterface $paginator): Response
     {
+        $reclamation =$this->getDoctrine()->getRepository(Reclamation::class)->findAll();
+        $reclamation = $paginator->paginate(
+            $reclamation, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5/*limit per page*/
+        );
         return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
+            'reclamations' => $reclamation
+            
             
         ]);
     }

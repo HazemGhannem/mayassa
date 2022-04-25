@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class ReclamationType extends AbstractType
 {
@@ -15,6 +16,8 @@ class ReclamationType extends AbstractType
         $builder
             ->add('titre')
             ->add('message')
+            ->add('captcha', CaptchaType::class)
+
             
 
         ;
