@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Reclamation CRUD</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="RecPart/css/owl.carousel.css">
+        <!-- bootstrap.min css -->
+        <link rel="stylesheet" href="RecPart/css/bootstrap.min.css">
+        <!-- Font-awesome.min css -->
+        <link rel="stylesheet" href="RecPart/css/font-awesome.min.css">
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="RecPart/css/animate.min.css">
+
+        <link rel="stylesheet" href="RecPart/css/main.css">
+        <!-- Responsive Stylesheet -->
+        <link rel="stylesheet" href="RecPart/css/responsive.css">
+        {#{{ encore_entry_link_tags('app') }}#}
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="RecPart/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="RecPart/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="RecPart/js/jquery.nav.js"></script>
+        <script src="RecPart/js/jquery.sticky.js"></script>
+        <script src="RecPart/js/bootstrap.min.js"></script>
+        <script src="RecPart/js/plugins.js"></script>
+        <script src="RecPart/js/wow.min.js"></script>
+        <script src="RecPart/js/main.js"></script>
+        {#{{ encore_entry_script_tags('app') }}#}
+    {% endblock %}
+
+
+    {% block header %}
+    <!--
+header-img start
+============================== -->
+    <section id="hero-area">
+        <img class="img-responsive" src="images/header.jpg" alt="">
+    </section>
+    <!--
+    Header start
+    ============================== -->
+    <nav id="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">
+                                        <img src="images/logo.png" alt="Logo">
+                                    </a>
+
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right" id="top-nav">
+                                        <li><a href="{{ path('app_reclamation_index')}}">Reclamation</a></li>
+                                        <li><a href="#about-us">about us</a></li>
+                                        <li><a href="#blog">Blog</a></li>
+                                        <li><a href="#price">menu</a></li>
+                                        <li><a href="#subscribe">news</a></li>
+                                        <li><a href="#contact-us">contacts</a></li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </nav><!-- header close -->
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <!--
+    Slider start
+    ============================== -->
+    <section id="slider">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+
+                        <div>
+
+                            {% block body%}
+                            {% endblock %}
+                        </div>
+
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </section><!-- slider close -->
+
+
+
+    <section id="subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <h1 class=" heading wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms"> SUBSCRIBE <span>to our</span> NEWSLETTER</h1>
+                        <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="400ms">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Enter your email to subscribe...">
+                                    <div class="input-group-addon">
+                                        <button class="btn btn-default" type="submit">subscribe</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </section><!-- #subscribe close -->
+              <!--
+              CONTACT US  start
+              ============================= -->
+    <section id="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <h1 class="heading wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">our <span>CONTACT US</span></h1>
+                        <h3 class="title wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">Sign Up for <span>Email Alerts</span> </h3>
+                        <form>
+                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Write your full name here...">
+                            </div>
+                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="800ms">
+                                <input type="text" class="form-control" placeholder="Write your email address here...">
+                            </div>
+                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1000ms">
+                                <textarea class="form-control" rows="3" placeholder="Write your message here..."></textarea>
+                            </div>
+                        </form>
+                        <a class="btn btn-default wow bounceIn" data-wow-duration="500ms" data-wow-delay="1300ms" href="#" role="button">send your message</a>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </section><!-- #contact-us close -->
+
+
+
+{% endblock  %}
+</body>
+</html>
+
+
+
+
+

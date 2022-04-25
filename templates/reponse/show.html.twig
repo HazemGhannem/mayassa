@@ -1,0 +1,29 @@
+{% extends 'admin.html.twig' %}
+{% block title %}Reponse{% endblock %}
+
+{% block body %}
+    <h1>Reponse</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id_rep</th>
+                <td>{{ reponse.idRep }}</td>
+            </tr>
+            <tr>
+                <th>Reponse</th>
+                <td>{{ reponse.message }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ reponse.createdAt ? reponse.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reponse_index') }}">back to list</a>
+
+    <a href="{{ path('app_reponse_edit', {'id_rep': reponse.id_rep}) }}">edit</a>
+
+    {{ include('reponse/_delete_form.html.twig') }}
+{% endblock %}

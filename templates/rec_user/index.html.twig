@@ -1,0 +1,45 @@
+{% extends 'test.html.twig' %}
+{% block title %}Reclamation Add{% endblock %}
+
+
+{% block body %}
+    <title>Hello RecUserController!</title>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div style="display: flow-root;align-items: center;justify-content: center; margin-top: 40px; padding: 30px;">
+        <div class="card">
+            <div class="card-body">
+
+
+                <!-- General Form Elements -->
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Objet</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.titre,{ 'attr':{'class':'form-control'}})   }}
+                        {{ form_errors(form.titre,{ 'attr':{'class':'text-danger'}})   }}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Message</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.message,{ 'attr':{'class':'form-control'}})   }}
+                        {{ form_errors(form.message,{ 'attr':{'class':'text-danger'}})   }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.Envoyer, {"label":"Send"},{'attr':{ "class":"btn btn-primary btn-lg" }}) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+
+

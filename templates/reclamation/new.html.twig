@@ -1,0 +1,54 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une reclamation</h1>
+    <div style="display: flow-root;align-items: center;justify-content: center; margin-top: 40px; padding: 30px;">
+        <div class="card">
+            <div class="card-body">
+
+
+                <!-- General Form Elements -->
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Objet</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.titre,{ 'attr':{'class':'form-control'}})   }}
+                        {{ form_errors(form.titre,{ 'attr':{'class':'text-danger'}})   }}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.message,{ 'attr':{'class':'form-control'}})   }}
+                        {{ form_errors(form.message,{ 'attr':{'class':'text-danger'}})   }}
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <button class="btn btn-success btn-icon-split"><span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                        {{ button_label|default('Valider') }}</button></button>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+    <a href="{{ path('app_reclamation_index') }}">Beck to list</a>
+
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'admin.html.twig' %}
+{% block title %}Reponse index{% endblock %}
+
+{% block body %}
+    <h1>Reponse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id_rep</th>
+                <th>Reponse</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.idRep }}</td>
+                <td>{{ reponse.message }}</td>
+                <td>{{ reponse.createdAt ? reponse.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reponse_show', {'id_rep': reponse.id_rep}) }}">show</a>
+                    <a href="{{ path('app_reponse_edit', {'id_rep': reponse.id_rep}) }}">edit</a>
+                    <a href="{{ path('app_reponse_delete',{'id_rep':reponse.id_rep}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+           
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
