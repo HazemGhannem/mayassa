@@ -59,32 +59,38 @@ class TestController extends AbstractController
            
             
             
-            // $client = SMSClient::getInstance('nEoxkRRL52MtHzUNAoaXc0ngnNVl9KDC', 'zSB1YIu2CSwoLnBL');
-            // $sms = new SMS($client);
-            // $sms->message( "Reclamation traiter avec success" )
-            //     ->from('+21654302753')
-            //     ->to("+216". strval($user->getTelephone()))
-            //      ->send();
+             $client = SMSClient::getInstance('nEoxkRRL52MtHzUNAoaXc0ngnNVl9KDC', 'zSB1YIu2CSwoLnBL');
+             $sms = new SMS($client);
+             $sms->message( "Reclamation traiter avec success" )
+                 ->from('+21654302753')
+                 ->to("+216". strval($user->getTelephone()))
+                  ->send();
 
 
                 $message = (new \Swift_Message('Response'))
                 ->setFrom('hamatalbi9921@gmail.com')
-                ->setTo("hazem.ghannem@esprit.tn")
+                ->setTo("mayssa.klay@esprit.tn")
                ->setBody("Reclamation traiter avec success"
                        
         );
         $mailer->send($message);
-        
-           
-          
-       
- 
+    
             return $this->redirectToRoute('app_reponse_index');
         }
 
         return $this->render('reponse/new.html.twig', [
             'form' => $form->createView(),
             
+           
+
+        ]);
+    }
+     /**
+     * @Route("/test", name="app_reponse_new")
+     */
+    public function d(): Response
+    {
+        return $this->render('test.html.twig', [
            
 
         ]);

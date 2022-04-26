@@ -51,10 +51,10 @@ class ReclamationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reclamationRepository->add($reclamation);
-            return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('reclamation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('reclamation/new.html.twig', [
+        return $this->render('rec_front/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),
         ]);
@@ -71,7 +71,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_reclamation_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="reclamation_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response
     {
@@ -80,24 +80,64 @@ class ReclamationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reclamationRepository->add($reclamation);
-            return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('reclamation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('reclamation/edit.html.twig', [
+        return $this->render('rec_front/edit.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_reclamation_delete", methods={"POST"})
+     * @Route("/del/{id}", name="app_reclamation_delete")
      */
-    public function delete(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response
+    public function delete($id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reclamation->getId(), $request->request->get('_token'))) {
-            $reclamationRepository->remove($reclamation);
-        }
+        $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($reclamation);
+        $em->flush();
 
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * @Route("/", name="reclamation_index", methods={"GET"})
+     */
+    public function indexx(Request $request,PaginatorInterface $paginator): Response
+    {
+        $reclamation =$this->getDoctrine()->getRepository(Reclamation::class)->findAll();
+        $reclamation = $paginator->paginate(
+            $reclamation, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5/*limit per page*/
+        );
+        return $this->render('rec_front/index.html.twig', [
+            'reclamations' => $reclamation
+            
+            
+        ]);
+    }
+    /**
+     * @Route("/show/{id}", name="reclamation_show", methods={"GET"})
+     */
+    public function showw(Reclamation $reclamation): Response
+    {
+        return $this->render('rec_front/show.html.twig', [
+            'reclamation' => $reclamation,
+        ]);
+    }
+     /**
+     * @Route("/dele/{id}", name="reclamation_delete", requirements={"id":"\d+"})
+     */
+    public function deletefront($id): Response
+    {
+        $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($reclamation);
+        $em->flush();
+
+        return $this->redirectToRoute('reclamation_index', [], Response::HTTP_SEE_OTHER);
+    }
+ 
 }

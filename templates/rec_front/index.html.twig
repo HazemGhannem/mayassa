@@ -1,4 +1,4 @@
-{% extends 'admin.html.twig' %}
+{% extends 'test.html.twig' %}
 
 {% block title %}Reclamation index{% endblock %}
 
@@ -25,11 +25,9 @@
                 <td>{{ reclamation.dateRec|date('d/m/Y')}}</td>
                 <td>{{ reclamation.message }}</td>
                 <td>
-                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
-                    <a href="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}">Delete</a>
-                    
+                    <a href="{{ path('reclamation_show', {'id': reclamation.id}) }}">show</a>
                     {% if reclamation.etat != "Résolue" %}
-                    <a href="{{ path('app_reponse_new', {'id': reclamation.id}) }}">Response</a>
+                    <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">edit</a>
                     {% endif %}
                 </td>
             </tr>
@@ -41,6 +39,21 @@
         </tbody>
         {{ knp_pagination_render(reclamations) }}
     </table>
+
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+    <!-- chatbot-->
+    <script>
+        var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("message") }}',
+            introMessage: 'Hello,You Can Ask Me Any Thing ',
+            title: 'Chatbot',
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4',
+            aboutText: ''
+        };
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+    <!-- chatbot-->
 {% endblock %}
