@@ -85,16 +85,7 @@ class TestController extends AbstractController
 
         ]);
     }
-     /**
-     * @Route("/test", name="app_reponse_new")
-     */
-    public function d(): Response
-    {
-        return $this->render('test.html.twig', [
-           
-
-        ]);
-    }
+  
     
     
 
