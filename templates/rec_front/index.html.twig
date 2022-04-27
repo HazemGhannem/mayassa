@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Titre</th>
                 <th>Etat</th>
                 <th>Date</th>
@@ -19,7 +19,7 @@
         <tbody id="myTable" >
         {% for reclamation in reclamations %}
             <tr>
-                <td>{{ reclamation.id }}</td>
+                
                 <td>{{ reclamation.titre }}</td>
                 <td>{{ reclamation.etat }}</td>
                 <td>{{ reclamation.dateRec|date('d/m/Y')}}</td>

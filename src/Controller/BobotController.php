@@ -41,6 +41,7 @@ class BobotController extends Controller{
         $botman->hears('(bye|see you|byebye)', function (BotMan $bot) {
             $bot->reply('Dont Forget to Come Back, bye and Have Nice Day ');
         });
+        
 
         // Set a fallback
         $botman->fallback(function (BotMan $bot) {

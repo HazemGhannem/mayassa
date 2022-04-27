@@ -55,10 +55,7 @@ class TestController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($reponses);
             $em->flush();
-            //dd($reclamation,$reponses,$idReclamation);
-           
-            
-            
+            //SMS
              $client = SMSClient::getInstance('nEoxkRRL52MtHzUNAoaXc0ngnNVl9KDC', 'zSB1YIu2CSwoLnBL');
              $sms = new SMS($client);
              $sms->message( "Reclamation traiter avec success" )
@@ -66,9 +63,9 @@ class TestController extends AbstractController
                  ->to("+216". strval($user->getTelephone()))
                   ->send();
 
-
+            //MAIL
                 $message = (new \Swift_Message('Response'))
-                ->setFrom('hamatalbi9921@gmail.com')
+                ->setFrom('mayssamayssaklai@gmail.com')
                 ->setTo("mayssa.klay@esprit.tn")
                ->setBody("Reclamation traiter avec success"
                        
